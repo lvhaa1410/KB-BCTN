@@ -29,7 +29,7 @@
   }
 
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-violet-400 to-indigo-300;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-teal-300;
   }
 }
 

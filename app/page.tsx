@@ -134,15 +134,15 @@ export default function Home() {
                   className="absolute top-full left-0 right-0 mt-4 glass-panel p-6 z-50 flex flex-wrap gap-3 shadow-2xl"
                 >
                   <div className="w-full text-sm font-bold text-slate-300 mb-3 uppercase tracking-wider flex items-center gap-2">
-                    <Building2 className="w-5 h-5 text-blue-400" /> Suggested Companies
+                    <Building2 className="w-5 h-5 text-violet-500" /> Suggested Companies
                   </div>
                   {mockCompanies.slice(0, 6).map(company => (
                     <button
                       key={company.id}
                       onClick={() => setSearchQuery(company.ticker)}
-                      className="px-5 py-2.5 rounded-full bg-slate-800/80 border border-slate-600 hover:bg-slate-700 hover:border-blue-500/50 hover:shadow-[0_0_10px_rgba(59,130,246,0.3)] hover:text-white text-base text-slate-200 font-medium transition-all duration-200 flex items-center gap-2"
+                      className="px-5 py-2.5 rounded-full bg-slate-800/80 border border-slate-600 hover:bg-slate-700 hover:border-violet-500/50 hover:shadow-[0_0_10px_rgba(124,58,237,0.4)] hover:text-white text-base text-slate-200 font-medium transition-all duration-200 flex items-center gap-2"
                     >
-                      <span className="w-2 h-2 rounded-full bg-blue-500"></span>
+                      <span className="w-2 h-2 rounded-full bg-violet-500"></span>
                       <span className="font-bold text-white">{company.ticker}</span>
                       <span className="text-slate-400 text-sm">| {company.sector}</span>
                     </button>
@@ -198,11 +198,11 @@ export default function Home() {
                   <div className="flex justify-between items-start mb-4">
                     <div className="flex items-center gap-3">
                       <div>
-                        <h3 className="text-2xl font-extrabold text-white group-hover:text-blue-400 transition-colors">{company.ticker}</h3>
+                        <h3 className="text-2xl font-extrabold text-white group-hover:text-violet-400 transition-colors">{company.ticker}</h3>
                         <span className="text-sm font-mono text-slate-300 bg-slate-800 px-2.5 py-1 rounded-md">{company.exchange}</span>
                       </div>
                     </div>
-                    <ChevronRight className="w-6 h-6 text-slate-400 group-hover:text-blue-400 transition-colors transform group-hover:translate-x-1" />
+                    <ChevronRight className="w-6 h-6 text-slate-400 group-hover:text-violet-400 transition-colors transform group-hover:translate-x-1" />
                   </div>
                   
                   <p className="text-slate-200 text-base leading-relaxed mb-6 flex-grow line-clamp-2">

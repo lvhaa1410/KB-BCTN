@@ -82,7 +82,7 @@ export default function CompanyPage({ params }: { params: Promise<{ ticker: stri
       <header className="h-20 border-b border-white/10 glass-panel rounded-none flex items-center px-6 shrink-0 z-20 sticky top-0">
         <Link href="/" className="flex items-center gap-2 text-slate-300 hover:text-white transition-colors mr-6">
           <ArrowLeft className="w-6 h-6" />
-          <span className="text-base font-bold">Quay lại tìm kiếm</span>
+          <span className="text-base font-bold">Back to Search</span>
         </Link>
         
         <div className="flex items-center gap-4 border-l border-white/10 pl-6">
@@ -108,7 +108,7 @@ export default function CompanyPage({ params }: { params: Promise<{ ticker: stri
         {/* Left Panel: Years Navigation (Narrow) */}
         <aside className="w-24 lg:w-72 border-r border-white/10 glass-panel rounded-none flex flex-col shrink-0 overflow-y-auto custom-scrollbar">
           <div className="p-6 hidden lg:block">
-            <h2 className="text-sm font-black text-slate-400 uppercase tracking-[0.2em] mb-4">Báo cáo thường niên</h2>
+            <h2 className="text-sm font-black text-slate-400 uppercase tracking-[0.2em] mb-4">Annual Reports</h2>
           </div>
           <div className="flex flex-col gap-2 p-2 lg:p-4 pt-4 lg:pt-0">
             {years.map(year => (
@@ -122,7 +122,7 @@ export default function CompanyPage({ params }: { params: Promise<{ ticker: stri
                 }`}
               >
                 <Calendar className="w-6 h-6 shrink-0" />
-                <span className="font-bold text-lg hidden lg:block">Báo cáo {year}</span>
+                <span className="font-bold text-lg hidden lg:block">{year} Report</span>
                 {selectedYear === year && <ChevronRight className="w-5 h-5 ml-auto hidden lg:block text-white/50" />}
               </button>
             ))}
@@ -140,7 +140,7 @@ export default function CompanyPage({ params }: { params: Promise<{ ticker: stri
               }`}
             >
               <FileText className="w-5 h-5" />
-              Tài liệu gốc
+              Original Document
             </button>
             <button 
               onClick={() => setActiveTab('tables')}
@@ -149,7 +149,7 @@ export default function CompanyPage({ params }: { params: Promise<{ ticker: stri
               }`}
             >
               <TableIcon className="w-5 h-5" />
-              Dữ liệu & Bảng biểu
+              Extracted Data & Tables
             </button>
             <div className="ml-auto">
               <button className="p-2.5 text-slate-300 hover:text-white hover:bg-white/5 rounded-xl transition-colors">
@@ -208,23 +208,23 @@ export default function CompanyPage({ params }: { params: Promise<{ ticker: stri
                   <div className="glass-panel p-8 border-violet-500/20 bg-violet-500/5 shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
                     <h3 className="text-xl font-black text-violet-400 mb-6 flex items-center gap-3">
                       <Sparkles className="w-6 h-6" />
-                      Thuộc tính then chốt
+                      Key Attributes
                     </h3>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                       <div className="bg-slate-900/60 p-5 rounded-2xl border border-white/10">
-                        <div className="text-slate-400 text-sm font-bold uppercase tracking-wider mb-2">Tổng doanh thu</div>
+                        <div className="text-slate-400 text-sm font-bold uppercase tracking-wider mb-2">Total Revenue</div>
                         <div className="text-2xl font-black text-white">120.5T VND</div>
                       </div>
                       <div className="bg-slate-900/60 p-5 rounded-2xl border border-white/10">
-                        <div className="text-slate-400 text-sm font-bold uppercase tracking-wider mb-2">Lợi nhuận ròng</div>
+                        <div className="text-slate-400 text-sm font-bold uppercase tracking-wider mb-2">Net Profit</div>
                         <div className="text-2xl font-black text-green-400">16.2T VND</div>
                       </div>
                       <div className="bg-slate-900/60 p-5 rounded-2xl border border-white/10">
-                        <div className="text-slate-400 text-sm font-bold uppercase tracking-wider mb-2">Số chi nhánh</div>
+                        <div className="text-slate-400 text-sm font-bold uppercase tracking-wider mb-2">Branches/Stores</div>
                         <div className="text-2xl font-black text-white">3,450</div>
                       </div>
                       <div className="bg-slate-900/60 p-5 rounded-2xl border border-white/10">
-                        <div className="text-slate-400 text-sm font-bold uppercase tracking-wider mb-2">Tổng nhân sự</div>
+                        <div className="text-slate-400 text-sm font-bold uppercase tracking-wider mb-2">Total Employees</div>
                         <div className="text-2xl font-black text-white">45,000</div>
                       </div>
                     </div>
@@ -270,8 +270,8 @@ export default function CompanyPage({ params }: { params: Promise<{ ticker: stri
         <aside className="w-[420px] glass-panel rounded-none flex flex-col shrink-0 border-l-0">
           <div className="h-20 border-b border-white/10 flex items-center px-6 gap-3 shrink-0 bg-slate-900/50">
             <Bot className="w-6 h-6 text-violet-500" />
-            <h2 className="text-lg font-black text-white uppercase tracking-wider">Phân tích AI</h2>
-            <span className="ml-auto text-xs font-bold px-3 py-1 rounded-full bg-violet-500/20 text-violet-400 border border-violet-500/30 animate-pulse">Trực tiếp</span>
+            <h2 className="text-lg font-black text-white uppercase tracking-wider">AI Analysis</h2>
+            <span className="ml-auto text-xs font-bold px-3 py-1 rounded-full bg-violet-500/20 text-violet-400 border border-violet-500/30 animate-pulse">Live</span>
           </div>
 
           <div className="flex-1 overflow-y-auto custom-scrollbar p-4 space-y-6">
@@ -279,17 +279,17 @@ export default function CompanyPage({ params }: { params: Promise<{ ticker: stri
             {/* Executive Summary */}
             <section>
               <h3 className="text-sm font-black text-slate-400 uppercase tracking-widest mb-4 flex items-center gap-2">
-                <FileText className="w-5 h-5" /> Tóm tắt điều hành
+                <FileText className="w-5 h-5" /> Executive Summary
               </h3>
               <div className="text-lg text-slate-200 leading-relaxed bg-violet-500/5 p-6 rounded-2xl border border-violet-500/20 shadow-lg italic">
-                Trong năm {selectedYear}, {company.ticker} đã thể hiện sự tăng trưởng mạnh mẽ bất chấp những thách thức kinh tế vĩ mô. Công ty đã thực hiện thành công kế hoạch mở rộng chiến lược của mình, dẫn đến mức tăng doanh thu 15% so với cùng kỳ năm ngoái.
+                In {selectedYear}, {company.ticker} demonstrated robust growth despite macroeconomic challenges. The company successfully executed its strategic expansion plan, resulting in a 15% YoY revenue increase.
               </div>
             </section>
 
             {/* Highlights & Lowlights */}
             <section>
               <h3 className="text-sm font-black text-slate-400 uppercase tracking-widest mb-4 flex items-center gap-2">
-                <AlertCircle className="w-5 h-5" /> Thông tin chi tiết
+                <AlertCircle className="w-5 h-5" /> Key Insights
               </h3>
               <div className="space-y-3">
                 {mockHighlights.map((highlight, idx) => (
@@ -313,7 +313,7 @@ export default function CompanyPage({ params }: { params: Promise<{ ticker: stri
           <div className="h-[45%] border-t border-white/10 flex flex-col bg-slate-900/40">
             <div className="p-4 border-b border-white/5 bg-slate-900/60 flex items-center gap-3">
               <MessageSquare className="w-5 h-5 text-violet-500" />
-              <h3 className="text-sm font-black text-slate-300 uppercase tracking-widest">Hỏi AI về báo cáo này</h3>
+              <h3 className="text-sm font-black text-slate-300 uppercase tracking-widest">Ask AI about this report</h3>
             </div>
             
             <div className="flex-1 overflow-y-auto custom-scrollbar p-6 space-y-5">
@@ -336,7 +336,7 @@ export default function CompanyPage({ params }: { params: Promise<{ ticker: stri
                   type="text"
                   value={chatInput}
                   onChange={(e) => setChatInput(e.target.value)}
-                  placeholder="Hỏi AI phân tích chi tiết..."
+                  placeholder="Ask AI for detailed analysis..."
                   className="w-full bg-slate-900 border-2 border-slate-700 rounded-2xl py-4 pl-6 pr-14 text-base text-white placeholder:text-slate-500 focus:outline-none focus:border-violet-500 transition-all shadow-inner"
                 />
                 <button 
