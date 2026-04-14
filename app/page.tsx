@@ -196,10 +196,13 @@ export default function Home() {
                   className="glass-panel glass-panel-hover hover:shadow-[0_0_20px_rgba(124,58,237,0.5)] hover:border-violet-700/50 active:scale-95 transition-all duration-300 p-6 h-full flex flex-col group cursor-pointer"
                 >
                   <div className="flex justify-between items-start mb-4">
-                    <div className="flex items-center gap-3">
-                      <div>
-                        <h3 className="text-2xl font-extrabold text-white group-hover:text-violet-400 transition-colors">{company.ticker}</h3>
-                        <span className="text-sm font-mono text-slate-300 bg-slate-800 px-2.5 py-1 rounded-md">{company.exchange}</span>
+                    <div className="flex items-center gap-4">
+                      <div className="w-14 h-14 rounded-2xl bg-slate-800/80 border border-slate-700/50 flex items-center justify-center shrink-0 shadow-inner">
+                        <span className="text-2xl font-black text-slate-200">{company.name.charAt(0)}</span>
+                      </div>
+                      <div className="flex flex-col items-start gap-1">
+                        <h3 className="text-2xl font-extrabold text-white group-hover:text-violet-400 transition-colors leading-none">{company.ticker}</h3>
+                        <span className="text-xs font-mono text-slate-400 bg-slate-800/80 px-2 py-0.5 rounded-md border border-white/5">{company.exchange}</span>
                       </div>
                     </div>
                     <ChevronRight className="w-6 h-6 text-slate-400 group-hover:text-violet-400 transition-colors transform group-hover:translate-x-1" />
@@ -210,9 +213,13 @@ export default function Home() {
                   </p>
                   
                   <div className="flex flex-wrap gap-2 mt-auto">
-                    <span className="text-sm font-medium px-4 py-1.5 rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/30 flex items-center gap-2">
+                    <span className="text-sm font-medium px-4 py-1.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/30 flex items-center gap-2">
                       {getSectorIcon(company.sector, { className: "w-4 h-4" })}
                       {company.sector}
+                    </span>
+                    <span className="text-sm font-medium px-4 py-1.5 rounded-full bg-teal-500/10 text-teal-400 border border-teal-500/30 flex items-center gap-2">
+                      <TrendingUp className="w-4 h-4" />
+                      {company.subSector}
                     </span>
 
                   </div>
