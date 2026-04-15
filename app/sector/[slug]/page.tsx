@@ -52,7 +52,7 @@ export default function SectorPage({ params }: { params: Promise<{ slug: string 
   const sectorCompanies = mockCompanies.filter(c => c.sector === sectorStr);
   
   const [selectedYears, setSelectedYears] = useState<number[]>([2023]);
-  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [errorState, setErrorState] = useState<{year: number, msg: string} | null>(null);
   const [activeTab, setActiveTab] = useState<'chat' | 'document' | 'tables'>('document');
   const [chatInput, setChatInput] = useState('');
   const [chatHistory, setChatHistory] = useState([
@@ -64,7 +64,7 @@ export default function SectorPage({ params }: { params: Promise<{ slug: string 
       if (selectedYears.length > 1) {
         const newYears = selectedYears.filter(y => y !== year);
         setSelectedYears(newYears);
-        setErrorMsg(null);
+        setErrorState(null);
         if (newYears.length === 1 && activeTab === 'chat') {
           setActiveTab('document');
         }
@@ -73,7 +73,8 @@ export default function SectorPage({ params }: { params: Promise<{ slug: string 
     }
 
     if (selectedYears.length === 2) {
-      setErrorMsg("Please unselect a year first. You can only compare up to 2 years.");
+      setErrorState({year, msg: "Please unselect a year first. You can only compare up to 2 consecutive years."});
+      setTimeout(() => setErrorState(null), 3000);
       return;
     }
 
@@ -82,12 +83,13 @@ export default function SectorPage({ params }: { params: Promise<{ slug: string 
       if (diff === 1) {
         const newYears = [...selectedYears, year].sort((a, b) => b - a);
         setSelectedYears(newYears);
-        setErrorMsg(null);
+        setErrorState(null);
         if (newYears.length === 2 && activeTab === 'document') {
           setActiveTab('chat');
         }
       } else {
-        setErrorMsg("You can only select two consecutive years.");
+        setErrorState({year, msg: "You can only select two consecutive years."});
+        setTimeout(() => setErrorState(null), 3000);
       }
     }
   };
@@ -148,26 +150,36 @@ export default function SectorPage({ params }: { params: Promise<{ slug: string 
           </div>
           <div className="flex flex-col gap-2 p-2 lg:p-4 pt-4 lg:pt-0">
             {years.map(year => (
-              <button
-                key={year}
-                onClick={() => handleYearToggle(year)}
-                className={`flex items-center justify-center lg:justify-start gap-4 p-4 rounded-xl transition-all duration-300 ${
-                  selectedYears.includes(year) 
-                    ? 'bg-violet-600 text-white shadow-[0_4px_15px_rgba(124,58,237,0.5)] border-t border-white/20' 
-                    : 'text-slate-300 hover:bg-white/5 hover:text-white border border-transparent'
-                }`}
-              >
-                <Calendar className="w-6 h-6 shrink-0" />
-                <span className="font-medium text-lg hidden lg:block">{year} Report</span>
-                {selectedYears.includes(year) && <ChevronRight className="w-5 h-5 ml-auto hidden lg:block text-white/50" />}
-              </button>
+              <div key={year} className="relative flex flex-col gap-2">
+                <button
+                  onClick={() => handleYearToggle(year)}
+                  className={`flex items-center justify-center lg:justify-start gap-4 p-4 rounded-xl transition-all duration-300 w-full ${
+                    selectedYears.includes(year) 
+                      ? 'bg-violet-600 text-white shadow-[0_4px_15px_rgba(124,58,237,0.5)] border-t border-white/20' 
+                      : 'text-slate-300 hover:bg-white/5 hover:text-white border border-transparent'
+                  }`}
+                >
+                  <Calendar className="w-6 h-6 shrink-0" />
+                  <span className="font-medium text-lg hidden lg:block">{year} Report</span>
+                  {selectedYears.includes(year) && <ChevronRight className="w-5 h-5 ml-auto hidden lg:block text-white/50" />}
+                </button>
+                <AnimatePresence>
+                  {errorState?.year === year && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0, y: -5 }}
+                      animate={{ opacity: 1, height: 'auto', y: 0 }}
+                      exit={{ opacity: 0, height: 0, y: -5 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="p-3 bg-red-500/10 border border-red-500/30 rounded-lg text-red-400 text-xs font-medium">
+                        {errorState.msg}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             ))}
           </div>
-          {errorMsg && (
-            <div className="p-4 mx-4 mb-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-sm font-medium">
-              {errorMsg}
-            </div>
-          )}
         </aside>
 
         {/* Middle Panel: Document Viewer & Tables (Wide) */}
