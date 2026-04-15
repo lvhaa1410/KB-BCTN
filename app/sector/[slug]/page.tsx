@@ -304,7 +304,7 @@ export default function SectorPage({ params }: { params: Promise<{ slug: string 
           </div>
         </main>
 
-        </main>
+
       </div>
     </div>
   );
