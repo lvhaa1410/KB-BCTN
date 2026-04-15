@@ -18,9 +18,6 @@ export const mockCompanies: Company[] = [
   { id: '7', ticker: 'VHM', name: 'Vinhomes Joint Stock Company', sector: 'Real Estate', subSector: 'Real Estate Development', exchange: 'HOSE' },
   { id: '8', ticker: 'GAS', name: 'Petrovietnam Gas Joint Stock Corporation', sector: 'Energy', subSector: 'Oil & Gas', exchange: 'HOSE' },
   { id: '9', ticker: 'BID', name: 'Joint Stock Commercial Bank for Investment and Development of Vietnam', sector: 'Financials', subSector: 'Banks', exchange: 'HOSE' },
-  { id: '10', ticker: 'CTG', name: 'Vietnam Joint Stock Commercial Bank for Industry and Trade', sector: 'Financials', subSector: 'Banks', exchange: 'HOSE' },
-  { id: '11', ticker: 'PNJ', name: 'Phu Nhuan Jewelry Joint Stock Company', sector: 'Retail', subSector: 'Specialty Retail', exchange: 'HOSE' },
-  { id: '12', ticker: 'REE', name: 'Refrigeration Electrical Engineering Corporation', sector: 'Industrials', subSector: 'Industrial Conglomerates', exchange: 'HOSE' },
 ];
 
 export const sectors = Array.from(new Set(mockCompanies.map(c => c.sector)));
