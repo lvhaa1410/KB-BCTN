@@ -6,7 +6,7 @@ import {
   Search, Building2, TrendingUp, BookOpen, ChevronRight, Filter, Briefcase,
   Monitor, ShoppingCart, CircleDollarSign, ShoppingBag, 
   Layers, Building, Zap, Factory,
-  Code2, Smartphone, Landmark, UtensilsCrossed, Hammer, Home, Flame, Cog, Package
+  Code2, Smartphone, Landmark, UtensilsCrossed, Hammer, Home as HomeIcon, Flame, Cog, Package
 } from 'lucide-react';
 
 const getSectorIcon = (sector: string, props: any) => {
@@ -30,7 +30,7 @@ const getSubSectorIcon = (subSector: string, props: any) => {
     case 'Banks': return <Landmark {...props} />;
     case 'Food & Beverage': return <UtensilsCrossed {...props} />;
     case 'Steel': return <Hammer {...props} />;
-    case 'Real Estate Development': return <Home {...props} />;
+    case 'Real Estate Development': return <HomeIcon {...props} />;
     case 'Oil & Gas': return <Flame {...props} />;
     case 'Industrial Conglomerates': return <Cog {...props} />;
     case 'Specialty Retail': return <Package {...props} />;
