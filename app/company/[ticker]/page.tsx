@@ -272,7 +272,7 @@ export default function CompanyPage({ params }: { params: Promise<{ ticker: stri
           <div className="h-[45%] border-b border-white/10 flex flex-col bg-slate-900/40">
             <div className="p-4 border-b border-white/5 bg-slate-900/60 flex items-center gap-3">
               <MessageSquare className="w-5 h-5 text-violet-500" />
-              <h3 className="text-sm font-semibold text-slate-300 uppercase tracking-widest">Ask AI about this report</h3>
+              <h3 className="text-lg font-semibold text-slate-300 uppercase tracking-widest">Ask AI about this report</h3>
             </div>
             
             <div className="flex-1 overflow-y-auto custom-scrollbar p-6 space-y-5">
