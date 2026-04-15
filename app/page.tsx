@@ -87,13 +87,13 @@ export default function Home() {
         >
           <button 
             onClick={() => setActiveSection('company')}
-            className={`px-8 py-2.5 rounded-xl text-base font-medium transition-all duration-300 ${activeSection === 'company' ? 'bg-violet-600 text-white shadow-[0_0_20px_rgba(124,58,237,0.5)] border-t border-white/20 box-border' : 'text-slate-300 hover:text-white hover:bg-white/5 bg-slate-800/40 border border-transparent'}`}
+            className={`px-8 py-2.5 rounded-xl text-lg font-medium transition-all duration-300 ${activeSection === 'company' ? 'bg-violet-600 text-white shadow-[0_0_20px_rgba(124,58,237,0.5)] border-t border-white/20 box-border' : 'text-slate-300 hover:text-white hover:bg-white/5 bg-slate-800/40 border border-transparent'}`}
           >
             Companies
           </button>
           <button 
             onClick={() => setActiveSection('sector')}
-             className={`px-8 py-2.5 rounded-xl text-base font-medium transition-all duration-300 ${activeSection === 'sector' ? 'bg-violet-600 text-white shadow-[0_0_20px_rgba(124,58,237,0.5)] border-t border-white/20 box-border' : 'text-slate-300 hover:text-white hover:bg-white/5 bg-slate-800/40 border border-transparent'}`}
+            className={`px-8 py-2.5 rounded-xl text-lg font-medium transition-all duration-300 ${activeSection === 'sector' ? 'bg-violet-600 text-white shadow-[0_0_20px_rgba(124,58,237,0.5)] border-t border-white/20 box-border' : 'text-slate-300 hover:text-white hover:bg-white/5 bg-slate-800/40 border border-transparent'}`}
           >
             Sectors
           </button>
