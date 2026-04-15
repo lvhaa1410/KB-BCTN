@@ -147,7 +147,7 @@ export default function Home() {
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  className="absolute top-full left-0 right-0 mt-4 glass-panel p-6 z-50 flex flex-wrap gap-3 shadow-2xl"
+                  className="absolute top-full left-0 right-0 mt-4 bg-slate-900 border border-slate-700 p-6 z-50 flex flex-wrap gap-3 shadow-2xl rounded-2xl"
                 >
                   <div className="w-full text-sm font-medium text-slate-300 mb-3 uppercase tracking-wider flex items-center gap-2">
                     <Building2 className="w-5 h-5 text-violet-500" /> Suggested Companies
@@ -156,7 +156,7 @@ export default function Home() {
                     <button
                       key={company.id}
                       onClick={() => setSearchQuery(company.ticker)}
-                      className="px-5 py-2.5 rounded-full bg-slate-800/80 border border-slate-600 hover:bg-slate-700 hover:border-violet-500/50 hover:shadow-[0_0_10px_rgba(124,58,237,0.4)] hover:text-white text-base text-slate-200 font-medium transition-all duration-200 flex items-center gap-2"
+                      className="px-5 py-2.5 rounded-full bg-slate-800 border border-slate-600 hover:bg-slate-700 hover:border-violet-500/50 hover:shadow-[0_0_10px_rgba(124,58,237,0.4)] hover:text-white text-base text-slate-200 font-medium transition-all duration-200 flex items-center gap-2"
                     >
                       <span className="w-2 h-2 rounded-full bg-violet-500"></span>
                       <span className="font-semibold text-white">{company.ticker}</span>
@@ -171,7 +171,7 @@ export default function Home() {
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  className="absolute top-full left-0 right-0 mt-4 glass-panel p-6 z-50 flex flex-wrap gap-3 shadow-2xl"
+                  className="absolute top-full left-0 right-0 mt-4 bg-slate-900 border border-slate-700 p-6 z-50 flex flex-wrap gap-3 shadow-2xl rounded-2xl"
                 >
                   <div className="w-full text-sm font-medium text-slate-300 mb-3 uppercase tracking-wider flex items-center gap-2">
                     <TrendingUp className="w-5 h-5 text-violet-500" /> Suggested Sectors
@@ -180,7 +180,7 @@ export default function Home() {
                     <button
                       key={sector}
                       onClick={() => setSearchQuery(sector)}
-                      className="px-5 py-2.5 rounded-full bg-slate-800/80 border border-slate-600 hover:bg-slate-700 hover:border-violet-500/50 hover:shadow-[0_0_10px_rgba(124,58,237,0.4)] hover:text-white text-base text-slate-200 font-medium transition-all duration-200 flex items-center gap-2"
+                      className="px-5 py-2.5 rounded-full bg-slate-800 border border-slate-600 hover:bg-slate-700 hover:border-violet-500/50 hover:shadow-[0_0_10px_rgba(124,58,237,0.4)] hover:text-white text-base text-slate-200 font-medium transition-all duration-200 flex items-center gap-2"
                     >
                       {getSectorIcon(sector, { className: "w-5 h-5 text-violet-500" })}
                       {sector}
