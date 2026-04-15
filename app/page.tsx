@@ -64,7 +64,7 @@ export default function Home() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-5xl md:text-7xl font-bold tracking-tight mb-6"
+          className="text-5xl md:text-7xl font-semibold tracking-tight mb-6"
         >
           <span className="text-gradient">TC Eyes</span>
         </motion.h1>
@@ -87,13 +87,13 @@ export default function Home() {
         >
           <button 
             onClick={() => setActiveSection('company')}
-            className={`px-8 py-2.5 rounded-xl text-base font-bold transition-all duration-300 ${activeSection === 'company' ? 'bg-violet-600 text-white shadow-[0_0_20px_rgba(124,58,237,0.5)] border-t border-white/20 box-border' : 'text-slate-300 hover:text-white hover:bg-white/5 bg-slate-800/40 border border-transparent'}`}
+            className={`px-8 py-2.5 rounded-xl text-base font-medium transition-all duration-300 ${activeSection === 'company' ? 'bg-violet-600 text-white shadow-[0_0_20px_rgba(124,58,237,0.5)] border-t border-white/20 box-border' : 'text-slate-300 hover:text-white hover:bg-white/5 bg-slate-800/40 border border-transparent'}`}
           >
             Companies
           </button>
           <button 
             onClick={() => setActiveSection('sector')}
-             className={`px-8 py-2.5 rounded-xl text-base font-bold transition-all duration-300 ${activeSection === 'sector' ? 'bg-violet-600 text-white shadow-[0_0_20px_rgba(124,58,237,0.5)] border-t border-white/20 box-border' : 'text-slate-300 hover:text-white hover:bg-white/5 bg-slate-800/40 border border-transparent'}`}
+             className={`px-8 py-2.5 rounded-xl text-base font-medium transition-all duration-300 ${activeSection === 'sector' ? 'bg-violet-600 text-white shadow-[0_0_20px_rgba(124,58,237,0.5)] border-t border-white/20 box-border' : 'text-slate-300 hover:text-white hover:bg-white/5 bg-slate-800/40 border border-transparent'}`}
           >
             Sectors
           </button>
@@ -133,7 +133,7 @@ export default function Home() {
                   exit={{ opacity: 0, y: -10 }}
                   className="absolute top-full left-0 right-0 mt-4 glass-panel p-6 z-50 flex flex-wrap gap-3 shadow-2xl"
                 >
-                  <div className="w-full text-sm font-bold text-slate-300 mb-3 uppercase tracking-wider flex items-center gap-2">
+                  <div className="w-full text-sm font-medium text-slate-300 mb-3 uppercase tracking-wider flex items-center gap-2">
                     <Building2 className="w-5 h-5 text-violet-500" /> Suggested Companies
                   </div>
                   {mockCompanies.slice(0, 6).map(company => (
@@ -143,7 +143,7 @@ export default function Home() {
                       className="px-5 py-2.5 rounded-full bg-slate-800/80 border border-slate-600 hover:bg-slate-700 hover:border-violet-500/50 hover:shadow-[0_0_10px_rgba(124,58,237,0.4)] hover:text-white text-base text-slate-200 font-medium transition-all duration-200 flex items-center gap-2"
                     >
                       <span className="w-2 h-2 rounded-full bg-violet-500"></span>
-                      <span className="font-bold text-white">{company.ticker}</span>
+                      <span className="font-semibold text-white">{company.ticker}</span>
                       <span className="text-slate-400 text-sm">| {company.sector}</span>
                     </button>
                   ))}
@@ -157,7 +157,7 @@ export default function Home() {
                   exit={{ opacity: 0, y: -10 }}
                   className="absolute top-full left-0 right-0 mt-4 glass-panel p-6 z-50 flex flex-wrap gap-3 shadow-2xl"
                 >
-                  <div className="w-full text-sm font-bold text-slate-300 mb-3 uppercase tracking-wider flex items-center gap-2">
+                  <div className="w-full text-sm font-medium text-slate-300 mb-3 uppercase tracking-wider flex items-center gap-2">
                     <TrendingUp className="w-5 h-5 text-violet-500" /> Suggested Sectors
                   </div>
                   {sectors.slice(0, 7).map(sector => (
@@ -198,10 +198,10 @@ export default function Home() {
                   <div className="flex justify-between items-start mb-4">
                     <div className="flex items-center gap-4">
                       <div className="w-14 h-14 rounded-2xl bg-slate-800/80 border border-slate-700/50 flex items-center justify-center shrink-0 shadow-inner">
-                        <span className="text-2xl font-black text-slate-200">{company.name.charAt(0)}</span>
+                        <span className="text-2xl font-semibold text-slate-200">{company.name.charAt(0)}</span>
                       </div>
                       <div className="flex flex-col items-start gap-1">
-                        <h3 className="text-2xl font-extrabold text-white group-hover:text-violet-400 transition-colors leading-none">{company.ticker}</h3>
+                        <h3 className="text-2xl font-semibold text-white group-hover:text-violet-400 transition-colors leading-none">{company.ticker}</h3>
                         <span className="text-xs font-mono text-slate-400 bg-slate-800/80 px-2 py-0.5 rounded-md border border-white/5">{company.exchange}</span>
                       </div>
                     </div>
@@ -252,7 +252,7 @@ export default function Home() {
                       <div className="flex items-center gap-3">
                         <div className="flex items-center gap-2">
                           {getSectorIcon(sectorStr, { className: "w-6 h-6 text-violet-500" })}
-                          <h3 className="text-2xl font-extrabold text-white group-hover:text-violet-400 transition-colors">{sectorStr}</h3>
+                          <h3 className="text-2xl font-semibold text-white group-hover:text-violet-400 transition-colors">{sectorStr}</h3>
                         </div>
                       </div>
                       <ChevronRight className="w-6 h-6 text-slate-400 group-hover:text-teal-400 transition-colors transform group-hover:translate-x-1" />

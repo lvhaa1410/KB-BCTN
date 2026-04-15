@@ -84,18 +84,18 @@ export default function SectorPage({ params }: { params: Promise<{ slug: string 
       <header className="h-20 border-b border-white/10 glass-panel rounded-none flex items-center px-6 shrink-0 z-20 sticky top-0">
         <Link href="/" className="flex items-center gap-2 text-slate-300 hover:text-white transition-colors mr-6">
           <ArrowLeft className="w-6 h-6" />
-          <span className="text-base font-bold">Back to Search</span>
+          <span className="text-base font-medium">Back to Search</span>
         </Link>
         
         <div className="flex items-center gap-4 border-l border-white/10 pl-6">
           <div>
-            <h1 className="text-2xl font-extrabold text-white leading-tight tracking-tight">{sectorStr}</h1>
+            <h1 className="text-2xl font-semibold text-white leading-tight tracking-tight">{sectorStr}</h1>
             <p className="text-sm font-medium text-slate-300 uppercase tracking-widest">{sectorCompanies.length} Listed Companies</p>
           </div>
         </div>
         
         <div className="ml-auto flex items-center gap-3">
-          <span className="text-sm font-bold px-4 py-1.5 rounded-full bg-violet-500/10 text-violet-400 border border-violet-500/30">
+          <span className="text-sm font-medium px-4 py-1.5 rounded-full bg-violet-500/10 text-violet-400 border border-violet-500/30">
             Sector Overview
           </span>
           <button className="p-2.5 text-slate-300 hover:text-white hover:bg-white/5 rounded-xl transition-colors">
@@ -110,7 +110,7 @@ export default function SectorPage({ params }: { params: Promise<{ slug: string 
         {/* Left Panel: Years Navigation (Narrow) */}
         <aside className="w-24 lg:w-72 border-r border-white/10 glass-panel rounded-none flex flex-col shrink-0 overflow-y-auto custom-scrollbar">
           <div className="p-6 hidden lg:block">
-            <h2 className="text-sm font-black text-slate-400 uppercase tracking-[0.2em] mb-4">Industry Reports</h2>
+            <h2 className="text-sm font-semibold text-slate-400 uppercase tracking-[0.2em] mb-4">Industry Reports</h2>
           </div>
           <div className="flex flex-col gap-2 p-2 lg:p-4 pt-4 lg:pt-0">
             {years.map(year => (
@@ -124,7 +124,7 @@ export default function SectorPage({ params }: { params: Promise<{ slug: string 
                 }`}
               >
                 <Calendar className="w-6 h-6 shrink-0" />
-                <span className="font-bold text-lg hidden lg:block">{year} Report</span>
+                <span className="font-medium text-lg hidden lg:block">{year} Report</span>
                 {selectedYear === year && <ChevronRight className="w-5 h-5 ml-auto hidden lg:block text-white/50" />}
               </button>
             ))}
@@ -137,7 +137,7 @@ export default function SectorPage({ params }: { params: Promise<{ slug: string 
           <div className="h-16 border-b border-white/10 flex items-center px-4 gap-3 shrink-0 bg-slate-900/50">
             <button 
               onClick={() => setActiveTab('document')}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-base font-bold transition-all duration-300 ${
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-base font-medium transition-all duration-300 ${
                 activeTab === 'document' ? 'bg-white/15 text-white shadow-lg' : 'text-slate-300 hover:text-white hover:bg-white/5'
               }`}
             >
@@ -146,7 +146,7 @@ export default function SectorPage({ params }: { params: Promise<{ slug: string 
             </button>
             <button 
               onClick={() => setActiveTab('tables')}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-base font-bold transition-all duration-300 ${
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-base font-medium transition-all duration-300 ${
                 activeTab === 'tables' ? 'bg-white/15 text-white shadow-lg' : 'text-slate-300 hover:text-white hover:bg-white/5'
               }`}
             >
@@ -208,26 +208,26 @@ export default function SectorPage({ params }: { params: Promise<{ slug: string 
                   className="max-w-5xl mx-auto space-y-8"
                 >
                   <div className="glass-panel p-8 border-violet-500/20 bg-violet-500/5 shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
-                    <h3 className="text-xl font-black text-violet-400 mb-6 flex items-center gap-3">
+                    <h3 className="text-xl font-semibold text-violet-400 mb-6 flex items-center gap-3">
                       <Sparkles className="w-6 h-6" />
                       Key Sector Attributes
                     </h3>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                       <div className="bg-slate-900/60 p-5 rounded-2xl border border-white/10">
-                        <div className="text-slate-400 text-sm font-bold uppercase tracking-wider mb-2">Sector Revenue Target</div>
-                        <div className="text-2xl font-black text-white">~ 480T VND</div>
+                        <div className="text-slate-400 text-sm font-medium uppercase tracking-wider mb-2">Sector Revenue Target</div>
+                        <div className="text-2xl font-semibold text-white">~ 480T VND</div>
                       </div>
                       <div className="bg-slate-900/60 p-5 rounded-2xl border border-white/10">
-                        <div className="text-slate-400 text-sm font-bold uppercase tracking-wider mb-2">Sector Profit Pool</div>
-                        <div className="text-2xl font-black text-green-400">61.2T VND</div>
+                        <div className="text-slate-400 text-sm font-medium uppercase tracking-wider mb-2">Sector Profit Pool</div>
+                        <div className="text-2xl font-semibold text-green-400">61.2T VND</div>
                       </div>
                       <div className="bg-slate-900/60 p-5 rounded-2xl border border-white/10">
-                        <div className="text-slate-400 text-sm font-bold uppercase tracking-wider mb-2">Tracked Entities</div>
-                        <div className="text-2xl font-black text-white">{sectorCompanies.length}</div>
+                        <div className="text-slate-400 text-sm font-medium uppercase tracking-wider mb-2">Tracked Entities</div>
+                        <div className="text-2xl font-semibold text-white">{sectorCompanies.length}</div>
                       </div>
                       <div className="bg-slate-900/60 p-5 rounded-2xl border border-white/10">
-                        <div className="text-slate-400 text-sm font-bold uppercase tracking-wider mb-2">Avg PE Ratio</div>
-                        <div className="text-2xl font-black text-white">14.5x</div>
+                        <div className="text-slate-400 text-sm font-medium uppercase tracking-wider mb-2">Avg PE Ratio</div>
+                        <div className="text-2xl font-semibold text-white">14.5x</div>
                       </div>
                     </div>
                   </div>
@@ -235,11 +235,11 @@ export default function SectorPage({ params }: { params: Promise<{ slug: string 
                   {mockTables.map((table, idx) => (
                     <div key={idx} className="glass-panel overflow-hidden border-white/10 shadow-xl">
                       <div className="px-8 py-5 border-b border-white/10 bg-slate-900/50">
-                        <h3 className="text-lg font-bold text-white tracking-tight">{table.title}</h3>
+                        <h3 className="text-lg font-medium text-white tracking-tight">{table.title}</h3>
                       </div>
                       <div className="overflow-x-auto">
                         <table className="w-full text-base text-left">
-                          <thead className="text-sm text-slate-300 font-black uppercase bg-slate-900/80 border-b border-white/10 tracking-widest">
+                          <thead className="text-sm text-slate-300 font-semibold uppercase bg-slate-900/80 border-b border-white/10 tracking-widest">
                             <tr>
                               {table.headers.map((header, i) => (
                                 <th key={i} className="px-8 py-5">{header}</th>
@@ -274,13 +274,13 @@ export default function SectorPage({ params }: { params: Promise<{ slug: string 
           <div className="h-[45%] border-b border-white/10 flex flex-col bg-slate-900/40">
             <div className="p-4 border-b border-white/5 bg-slate-900/60 flex items-center gap-3">
               <MessageSquare className="w-5 h-5 text-violet-500" />
-              <h3 className="text-sm font-black text-slate-300 uppercase tracking-widest">Ask AI about this sector</h3>
+              <h3 className="text-sm font-semibold text-slate-300 uppercase tracking-widest">Ask AI about this sector</h3>
             </div>
             
             <div className="flex-1 overflow-y-auto custom-scrollbar p-6 space-y-5">
               {chatHistory.map((msg, idx) => (
                 <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                  <div className={`max-w-[90%] p-4 rounded-2xl text-base font-bold shadow-md ${
+                  <div className={`max-w-[90%] p-4 rounded-2xl text-base font-medium shadow-md ${
                     msg.role === 'user' 
                       ? 'bg-violet-600 text-white rounded-tr-sm' 
                       : 'bg-slate-800/80 text-slate-100 border border-white/10 rounded-tl-sm'
@@ -313,15 +313,15 @@ export default function SectorPage({ params }: { params: Promise<{ slug: string 
 
           <div className="h-20 border-b border-white/10 flex items-center px-6 gap-3 shrink-0 bg-slate-900/50">
             <Bot className="w-6 h-6 text-violet-500" />
-            <h2 className="text-lg font-black text-white uppercase tracking-wider">AI Analysis</h2>
-            <span className="ml-auto text-xs font-bold px-3 py-1 rounded-full bg-violet-500/20 text-violet-400 border border-violet-500/30 animate-pulse">Live</span>
+            <h2 className="text-lg font-semibold text-white uppercase tracking-wider">AI Analysis</h2>
+            <span className="ml-auto text-xs font-medium px-3 py-1 rounded-full bg-violet-500/20 text-violet-400 border border-violet-500/30 animate-pulse">Live</span>
           </div>
 
           <div className="flex-1 overflow-y-auto custom-scrollbar p-4 space-y-6">
             
             {/* Executive Summary */}
             <section>
-              <h3 className="text-sm font-black text-slate-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+              <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-widest mb-4 flex items-center gap-2">
                 <FileText className="w-5 h-5" /> Executive Summary
               </h3>
               <div className="text-lg text-slate-200 leading-relaxed bg-violet-500/5 p-6 rounded-2xl border border-violet-500/20 shadow-lg italic">
@@ -331,7 +331,7 @@ export default function SectorPage({ params }: { params: Promise<{ slug: string 
 
             {/* Highlights & Lowlights */}
             <section>
-              <h3 className="text-sm font-black text-slate-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+              <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-widest mb-4 flex items-center gap-2">
                 <AlertCircle className="w-5 h-5" /> Sector Insights
               </h3>
               <div className="space-y-3">
@@ -344,7 +344,7 @@ export default function SectorPage({ params }: { params: Promise<{ slug: string 
                     ) : (
                       <div className="w-6 h-6 rounded-full border-2 border-slate-500 shrink-0" />
                     )}
-                    <span className="text-base font-bold text-slate-100">{highlight.text}</span>
+                    <span className="text-base font-medium text-slate-100">{highlight.text}</span>
                   </div>
                 ))}
               </div>

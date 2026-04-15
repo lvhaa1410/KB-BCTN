@@ -38,7 +38,10 @@ body {
   background-image: linear-gradient(to bottom, #04010a 0%, #100626 100%);
   background-attachment: fixed;
   color: #e2e8f0;
-  font-family: var(--font-sans), sans-serif;
+  font-family: 'Inter', var(--font-sans), sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6;
   overflow-x: hidden;
 }
 
