@@ -270,6 +270,47 @@ export default function SectorPage({ params }: { params: Promise<{ slug: string 
 
         {/* Right Panel: Agentic Analysis (Fixed Width) */}
         <aside className="w-[420px] glass-panel rounded-none flex flex-col shrink-0 border-l-0">
+          {/* Chat Interface */}
+          <div className="h-[45%] border-b border-white/10 flex flex-col bg-slate-900/40">
+            <div className="p-4 border-b border-white/5 bg-slate-900/60 flex items-center gap-3">
+              <MessageSquare className="w-5 h-5 text-violet-500" />
+              <h3 className="text-sm font-black text-slate-300 uppercase tracking-widest">Ask AI about this sector</h3>
+            </div>
+            
+            <div className="flex-1 overflow-y-auto custom-scrollbar p-6 space-y-5">
+              {chatHistory.map((msg, idx) => (
+                <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                  <div className={`max-w-[90%] p-4 rounded-2xl text-base font-bold shadow-md ${
+                    msg.role === 'user' 
+                      ? 'bg-violet-600 text-white rounded-tr-sm' 
+                      : 'bg-slate-800/80 text-slate-100 border border-white/10 rounded-tl-sm'
+                  }`}>
+                    {msg.content}
+                  </div>
+                </div>
+              ))}
+            </div>
+ 
+            <div className="p-6 bg-slate-950/80 border-t border-white/10">
+              <form onSubmit={handleSendMessage} className="relative">
+                <input
+                  type="text"
+                  value={chatInput}
+                  onChange={(e) => setChatInput(e.target.value)}
+                  placeholder="Ask AI for detailed analysis..."
+                  className="w-full bg-slate-900 border-2 border-slate-700 rounded-2xl py-4 pl-6 pr-14 text-base text-white placeholder:text-slate-500 focus:outline-none focus:border-violet-500 transition-all shadow-inner"
+                />
+                <button 
+                  type="submit"
+                  disabled={!chatInput.trim()}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 p-2.5 bg-violet-600 text-white rounded-xl disabled:bg-slate-700 disabled:text-slate-500 transition-all hover:scale-105 active:scale-95"
+                >
+                  <Send className="w-5 h-5" />
+                </button>
+              </form>
+            </div>
+          </div>
+
           <div className="h-20 border-b border-white/10 flex items-center px-6 gap-3 shrink-0 bg-slate-900/50">
             <Bot className="w-6 h-6 text-violet-500" />
             <h2 className="text-lg font-black text-white uppercase tracking-wider">AI Analysis</h2>
@@ -309,47 +350,6 @@ export default function SectorPage({ params }: { params: Promise<{ slug: string 
               </div>
             </section>
 
-          </div>
-
-          {/* Chat Interface */}
-          <div className="h-[45%] border-t border-white/10 flex flex-col bg-slate-900/40">
-            <div className="p-4 border-b border-white/5 bg-slate-900/60 flex items-center gap-3">
-              <MessageSquare className="w-5 h-5 text-violet-500" />
-              <h3 className="text-sm font-black text-slate-300 uppercase tracking-widest">Ask AI about this sector</h3>
-            </div>
-            
-            <div className="flex-1 overflow-y-auto custom-scrollbar p-6 space-y-5">
-              {chatHistory.map((msg, idx) => (
-                <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                  <div className={`max-w-[90%] p-4 rounded-2xl text-base font-bold shadow-md ${
-                    msg.role === 'user' 
-                      ? 'bg-violet-600 text-white rounded-tr-sm' 
-                      : 'bg-slate-800/80 text-slate-100 border border-white/10 rounded-tl-sm'
-                  }`}>
-                    {msg.content}
-                  </div>
-                </div>
-              ))}
-            </div>
- 
-            <div className="p-6 bg-slate-950/80 border-t border-white/10">
-              <form onSubmit={handleSendMessage} className="relative">
-                <input
-                  type="text"
-                  value={chatInput}
-                  onChange={(e) => setChatInput(e.target.value)}
-                  placeholder="Ask AI for detailed analysis..."
-                  className="w-full bg-slate-900 border-2 border-slate-700 rounded-2xl py-4 pl-6 pr-14 text-base text-white placeholder:text-slate-500 focus:outline-none focus:border-violet-500 transition-all shadow-inner"
-                />
-                <button 
-                  type="submit"
-                  disabled={!chatInput.trim()}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 p-2.5 bg-violet-600 text-white rounded-xl disabled:bg-slate-700 disabled:text-slate-500 transition-all hover:scale-105 active:scale-95"
-                >
-                  <Send className="w-5 h-5" />
-                </button>
-              </form>
-            </div>
           </div>
         </aside>
 
