@@ -33,6 +33,10 @@
   }
 }
 
+html {
+  font-size: 87.5%; /* 14px base — scales all rem units down proportionally */
+}
+
 body {
   background-color: #070314;
   background-image: linear-gradient(to bottom, #04010a 0%, #100626 100%);
