@@ -51,12 +51,38 @@ export default function SectorPage({ params }: { params: Promise<{ slug: string 
   const sectorStr = sectors.find(s => encodeURIComponent(s.toLowerCase().replace(/\s+/g, '-')) === sectorSlug) || sectors[0];
   const sectorCompanies = mockCompanies.filter(c => c.sector === sectorStr);
   
-  const [selectedYear, setSelectedYear] = useState(2023);
-  const [activeTab, setActiveTab] = useState<'document' | 'tables'>('document');
+  const [selectedYears, setSelectedYears] = useState<number[]>([2023]);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState<'chat' | 'tables'>('chat');
   const [chatInput, setChatInput] = useState('');
   const [chatHistory, setChatHistory] = useState([
-    { role: 'agent', content: `Hello! I'm your AI analyst for the ${sectorStr} sector's ${selectedYear} Aggregated Report. What would you like to know?` }
+    { role: 'agent', content: `Hello! I'm your AI analyst for the ${sectorStr} sector's ${selectedYears.join(' & ')} Aggregated Report(s). What would you like to know?` }
   ]);
+
+  const handleYearToggle = (year: number) => {
+    if (selectedYears.includes(year)) {
+      if (selectedYears.length > 1) {
+        setSelectedYears(selectedYears.filter(y => y !== year));
+        setErrorMsg(null);
+      }
+      return;
+    }
+
+    if (selectedYears.length === 2) {
+      setErrorMsg("Please unselect a year first. You can only compare up to 2 years.");
+      return;
+    }
+
+    if (selectedYears.length === 1) {
+      const diff = Math.abs(selectedYears[0] - year);
+      if (diff === 1) {
+        setSelectedYears([...selectedYears, year].sort((a, b) => b - a));
+        setErrorMsg(null);
+      } else {
+        setErrorMsg("You can only select two consecutive years.");
+      }
+    }
+  };
 
   const handleSendMessage = (e: React.FormEvent) => {
     e.preventDefault();
@@ -69,7 +95,7 @@ export default function SectorPage({ params }: { params: Promise<{ slug: string 
     setTimeout(() => {
       setChatHistory(prev => [...prev, { 
         role: 'agent', 
-        content: `Based on the ${selectedYear} aggregated sector data, the ${sectorStr} industry heavily prioritized scalability. The specific details regarding your query are summarized on page 12 of the industry macroeconomic factors section.` 
+        content: `Based on the ${selectedYears.join(' and ')} aggregated sector data, the ${sectorStr} industry heavily prioritized scalability. The specific details regarding your query are summarized on page 12 of the industry macroeconomic factors section.` 
       }]);
     }, 1000);
   };
@@ -116,19 +142,24 @@ export default function SectorPage({ params }: { params: Promise<{ slug: string 
             {years.map(year => (
               <button
                 key={year}
-                onClick={() => setSelectedYear(year)}
+                onClick={() => handleYearToggle(year)}
                 className={`flex items-center justify-center lg:justify-start gap-4 p-4 rounded-xl transition-all duration-300 ${
-                  selectedYear === year 
+                  selectedYears.includes(year) 
                     ? 'bg-violet-600 text-white shadow-[0_4px_15px_rgba(124,58,237,0.5)] border-t border-white/20' 
                     : 'text-slate-300 hover:bg-white/5 hover:text-white border border-transparent'
                 }`}
               >
                 <Calendar className="w-6 h-6 shrink-0" />
                 <span className="font-medium text-lg hidden lg:block">{year} Report</span>
-                {selectedYear === year && <ChevronRight className="w-5 h-5 ml-auto hidden lg:block text-white/50" />}
+                {selectedYears.includes(year) && <ChevronRight className="w-5 h-5 ml-auto hidden lg:block text-white/50" />}
               </button>
             ))}
           </div>
+          {errorMsg && (
+            <div className="p-4 mx-4 mb-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-sm font-medium">
+              {errorMsg}
+            </div>
+          )}
         </aside>
 
         {/* Middle Panel: Document Viewer & Tables (Wide) */}
@@ -136,13 +167,13 @@ export default function SectorPage({ params }: { params: Promise<{ slug: string 
           {/* View Toggle */}
           <div className="h-16 border-b border-white/10 flex items-center px-4 gap-3 shrink-0 bg-slate-900/50">
             <button 
-              onClick={() => setActiveTab('document')}
+              onClick={() => setActiveTab('chat')}
               className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-base font-medium transition-all duration-300 ${
-                activeTab === 'document' ? 'bg-white/15 text-white shadow-lg' : 'text-slate-300 hover:text-white hover:bg-white/5'
+                activeTab === 'chat' ? 'bg-white/15 text-white shadow-lg' : 'text-slate-300 hover:text-white hover:bg-white/5'
               }`}
             >
-              <FileText className="w-5 h-5" />
-              Aggregate Document
+              <MessageSquare className="w-5 h-5" />
+              AI Chat Analysis
             </button>
             <button 
               onClick={() => setActiveTab('tables')}
@@ -163,40 +194,45 @@ export default function SectorPage({ params }: { params: Promise<{ slug: string 
           {/* Viewer Content */}
           <div className="flex-1 overflow-y-auto custom-scrollbar p-6 bg-[#070314]/50 backdrop-blur-md">
             <AnimatePresence mode="wait">
-              {activeTab === 'document' ? (
+              {activeTab === 'chat' ? (
                 <motion.div
-                  key="document"
+                  key="chat"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  className="max-w-4xl mx-auto"
+                  className="max-w-4xl mx-auto h-full flex flex-col pt-8"
                 >
-                  {/* Mock PDF Viewer */}
-                  <div className="aspect-[1/1.4] w-full bg-slate-100 rounded-lg shadow-2xl overflow-hidden relative">
-                    <div className="absolute inset-0 p-12 text-slate-800 flex flex-col">
-                      <div className="text-center mb-16">
-                        <h1 className="text-4xl font-serif font-bold text-slate-900 mb-4">{sectorStr} Sector</h1>
-                        <h2 className="text-2xl font-serif text-slate-600">Aggregated Industry Report {selectedYear}</h2>
-                      </div>
-                      
-                      <div className="space-y-6 text-sm leading-relaxed font-serif text-slate-700 flex-1">
-                        <p>
-                          <strong>Macroeconomic Overview</strong><br/><br/>
-                          Dear Stakeholders,<br/><br/>
-                          The year {selectedYear} marked a significant milestone for the {sectorStr} sector as our constituent companies navigated through a complex global economic landscape. Despite the headwinds, aggregate business resilience and dedicated workforces across the industry enabled us to deliver strong collective outcomes.
-                        </p>
-                        <p>
-                          The sector's strategic focus on modernization and sustainable structural growth has yielded positive macro-level trends. We have seen widespread adoption of improved operational efficiencies, positioning the entirety of the {sectorStr} market well for future investment opportunities.
-                        </p>
-                        <div className="w-full h-48 bg-slate-200 rounded-md flex items-center justify-center text-slate-400 border border-slate-300 mt-8">
-                          [Sector Growth Chart Placeholder]
+                  <div className="flex-1 overflow-y-auto custom-scrollbar p-6 space-y-6">
+                    {chatHistory.map((msg, idx) => (
+                      <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                        <div className={`max-w-[85%] p-5 rounded-2xl text-[1.1rem] leading-relaxed font-medium shadow-md ${
+                          msg.role === 'user' 
+                            ? 'bg-violet-600 text-white rounded-tr-sm' 
+                            : 'bg-slate-800/80 text-slate-100 border border-white/10 rounded-tl-sm'
+                        }`}>
+                          {msg.content}
                         </div>
                       </div>
-                      
-                      <div className="mt-auto pt-8 border-t border-slate-300 text-center text-xs text-slate-500">
-                        Page 1 of 65
-                      </div>
-                    </div>
+                    ))}
+                  </div>
+
+                  <div className="p-6">
+                    <form onSubmit={handleSendMessage} className="relative">
+                      <input
+                        type="text"
+                        value={chatInput}
+                        onChange={(e) => setChatInput(e.target.value)}
+                        placeholder="Ask AI for detailed analysis about the selected reports..."
+                        className="w-full bg-slate-900 border-2 border-slate-700 rounded-3xl py-4 pl-6 pr-14 text-lg text-white placeholder:text-slate-500 focus:outline-none focus:border-violet-500 transition-all shadow-inner"
+                      />
+                      <button 
+                        type="submit"
+                        disabled={!chatInput.trim()}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 p-3 bg-violet-600 text-white rounded-2xl disabled:bg-slate-700 disabled:text-slate-500 transition-all hover:scale-105 active:scale-95"
+                      >
+                        <Send className="w-6 h-6" />
+                      </button>
+                    </form>
                   </div>
                 </motion.div>
               ) : (
@@ -268,91 +304,7 @@ export default function SectorPage({ params }: { params: Promise<{ slug: string 
           </div>
         </main>
 
-        {/* Right Panel: Agentic Analysis (Fixed Width) */}
-        <aside className="w-[420px] glass-panel rounded-none flex flex-col shrink-0 border-l-0">
-          {/* Chat Interface */}
-          <div className="h-[45%] border-b border-white/10 flex flex-col bg-slate-900/40">
-            <div className="p-4 border-b border-white/5 bg-slate-900/60 flex items-center gap-3">
-              <MessageSquare className="w-5 h-5 text-violet-500" />
-              <h3 className="text-lg font-semibold text-slate-300 uppercase tracking-widest">Ask AI about this sector</h3>
-            </div>
-            
-            <div className="flex-1 overflow-y-auto custom-scrollbar p-6 space-y-5">
-              {chatHistory.map((msg, idx) => (
-                <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                  <div className={`max-w-[90%] p-4 rounded-2xl text-base font-medium shadow-md ${
-                    msg.role === 'user' 
-                      ? 'bg-violet-600 text-white rounded-tr-sm' 
-                      : 'bg-slate-800/80 text-slate-100 border border-white/10 rounded-tl-sm'
-                  }`}>
-                    {msg.content}
-                  </div>
-                </div>
-              ))}
-            </div>
- 
-            <div className="p-6 bg-slate-950/80 border-t border-white/10">
-              <form onSubmit={handleSendMessage} className="relative">
-                <input
-                  type="text"
-                  value={chatInput}
-                  onChange={(e) => setChatInput(e.target.value)}
-                  placeholder="Ask AI for detailed analysis..."
-                  className="w-full bg-slate-900 border-2 border-slate-700 rounded-2xl py-4 pl-6 pr-14 text-base text-white placeholder:text-slate-500 focus:outline-none focus:border-violet-500 transition-all shadow-inner"
-                />
-                <button 
-                  type="submit"
-                  disabled={!chatInput.trim()}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 p-2.5 bg-violet-600 text-white rounded-xl disabled:bg-slate-700 disabled:text-slate-500 transition-all hover:scale-105 active:scale-95"
-                >
-                  <Send className="w-5 h-5" />
-                </button>
-              </form>
-            </div>
-          </div>
-
-          <div className="h-20 border-b border-white/10 flex items-center px-6 gap-3 shrink-0 bg-slate-900/50">
-            <Bot className="w-6 h-6 text-violet-500" />
-            <h2 className="text-lg font-semibold text-white uppercase tracking-wider">AI Analysis</h2>
-            <span className="ml-auto text-xs font-medium px-3 py-1 rounded-full bg-violet-500/20 text-violet-400 border border-violet-500/30 animate-pulse">Live</span>
-          </div>
-
-          <div className="flex-1 overflow-y-auto custom-scrollbar p-4 space-y-6">
-            
-            {/* Executive Summary */}
-            <section>
-              <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-widest mb-4 flex items-center gap-2">
-                <FileText className="w-5 h-5" /> Executive Summary
-              </h3>
-              <div className="text-lg text-slate-200 leading-relaxed bg-violet-500/5 p-6 rounded-2xl border border-violet-500/20 shadow-lg italic">
-                In {selectedYear}, the {sectorStr} sector demonstrated robust growth despite macroeconomic challenges. The collective market successfully executed broad strategic expansion plans, resulting in a 11.8% YoY revenue increase across tracked entities.
-              </div>
-            </section>
-
-            {/* Highlights & Lowlights */}
-            <section>
-              <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-widest mb-4 flex items-center gap-2">
-                <AlertCircle className="w-5 h-5" /> Sector Insights
-              </h3>
-              <div className="space-y-3">
-                {mockHighlights.map((highlight, idx) => (
-                  <div key={idx} className="flex items-start gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 shadow-sm transition-hover hover:bg-white/10">
-                    {highlight.type === 'positive' ? (
-                      <TrendingUp className="w-6 h-6 text-green-400 shrink-0" />
-                    ) : highlight.type === 'negative' ? (
-                      <TrendingDown className="w-6 h-6 text-red-400 shrink-0" />
-                    ) : (
-                      <div className="w-6 h-6 rounded-full border-2 border-slate-500 shrink-0" />
-                    )}
-                    <span className="text-base font-medium text-slate-100">{highlight.text}</span>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-          </div>
-        </aside>
-
+        </main>
       </div>
     </div>
   );
