@@ -5,7 +5,8 @@ import { motion, AnimatePresence } from 'motion/react';
 import { 
   Search, Building2, TrendingUp, BookOpen, ChevronRight, Filter, Briefcase,
   Monitor, ShoppingCart, CircleDollarSign, ShoppingBag, 
-  Layers, Building, Zap, Factory
+  Layers, Building, Zap, Factory,
+  Code2, Smartphone, Landmark, UtensilsCrossed, Hammer, Home, Flame, Cog, Package
 } from 'lucide-react';
 
 const getSectorIcon = (sector: string, props: any) => {
@@ -19,6 +20,21 @@ const getSectorIcon = (sector: string, props: any) => {
     case 'Energy': return <Zap {...props} />;
     case 'Industrials': return <Factory {...props} />;
     default: return <Briefcase {...props} />;
+  }
+};
+
+const getSubSectorIcon = (subSector: string, props: any) => {
+  switch (subSector) {
+    case 'Software & IT Services': return <Code2 {...props} />;
+    case 'Electronics Retail': return <Smartphone {...props} />;
+    case 'Banks': return <Landmark {...props} />;
+    case 'Food & Beverage': return <UtensilsCrossed {...props} />;
+    case 'Steel': return <Hammer {...props} />;
+    case 'Real Estate Development': return <Home {...props} />;
+    case 'Oil & Gas': return <Flame {...props} />;
+    case 'Industrial Conglomerates': return <Cog {...props} />;
+    case 'Specialty Retail': return <Package {...props} />;
+    default: return <TrendingUp {...props} />;
   }
 };
 import Link from 'next/link';
@@ -218,7 +234,7 @@ export default function Home() {
                       {company.sector}
                     </span>
                     <span className="text-sm font-medium px-4 py-1.5 rounded-full bg-teal-500/10 text-teal-400 border border-teal-500/30 flex items-center gap-2">
-                      <TrendingUp className="w-4 h-4" />
+                      {getSubSectorIcon(company.subSector, { className: "w-4 h-4" })}
                       {company.subSector}
                     </span>
 
